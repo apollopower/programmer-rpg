@@ -25,29 +25,36 @@ while True:
             pygame.quit()
             sys.exit()
         if event.type == KEYDOWN:
-            if event.key == K_RIGHT:
+            if event.key == K_d:
                 heroRight = True
-            if event.key == K_LEFT:
+            if event.key == K_a:
                 heroLeft = True
-            if event.key == K_UP:
+            if event.key == K_w:
                 heroUp = True
-            if event.key == K_DOWN:
+            if event.key == K_s:
                 heroDown = True
         if event.type == KEYUP:
-            if event.key == K_RIGHT:
+            if event.key == K_d:
                 heroRight = False
-            if event.key == K_LEFT:
+            if event.key == K_a:
                 heroLeft = False
-            if event.key == K_UP:
+            if event.key == K_w:
                 heroUp = False
-            if event.key == K_DOWN:
+            if event.key == K_s:
                 heroDown = False
     # End of event checker
 
-    # Determine Player Velocity
+    # Determine Hero Velocity
     xVel = yVel = 0
-    if (heroUp and not heroDown):
-        print("lkjsdf")
+    if (heroUp and not heroDown): yVel -= heroSpeed
+    if (heroDown and not heroUp): yVel += heroSpeed
+    if (heroLeft and not heroRight): xVel -= heroSpeed
+    if (heroRight and not heroLeft): xVel += heroSpeed
+    
+    # Update Hero Position:
+    heroPos[0] += xVel / 60
+    heroPos[1] += yVel / 60
+
 
     # Loading tilemap
     for row in range(MAPHEIGHT):

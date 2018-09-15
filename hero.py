@@ -4,7 +4,7 @@ from pygame.locals import *
 HERO = pygame.image.load("resources/hero.png")
 
 heroPos = [0,0]
-heroSpeed = 300
+heroSpeed = 10
 
 xVel = 0
 yVel = 0
