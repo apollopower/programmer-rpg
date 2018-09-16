@@ -1,9 +1,10 @@
 import pygame
 from pygame.locals import *
+from tilemap import TILESIZE, MAPHEIGHT, MAPWIDTH
 
 HERO = pygame.image.load("resources/hero.png")
 
-heroPos = [0,0]
+heroPos = [(MAPWIDTH / 2), (MAPHEIGHT / 2)]
 heroSpeed = 10
 
 xVel = 0

@@ -14,6 +14,7 @@ BLACK = (0, 0, 0)
 # Creating Game Window
 DISPLAYSURF = pygame.display.set_mode((MAPWIDTH*TILESIZE,MAPHEIGHT*TILESIZE))
 pygame.display.set_caption("Programmer RPG")
+pygame.display.set_icon(pygame.image.load("resources/hero.png"))
 
 # pygame.key.set_repeat(10,10)
 
@@ -54,6 +55,9 @@ while True:
     # Update Hero Position:
     heroPos[0] += xVel / 60
     heroPos[1] += yVel / 60
+
+    print(heroPos[0])
+    print(heroPos[1])
 
 
     # Loading tilemap
