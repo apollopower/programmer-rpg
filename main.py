@@ -16,7 +16,13 @@ DISPLAYSURF = pygame.display.set_mode((MAPWIDTH*TILESIZE,MAPHEIGHT*TILESIZE))
 pygame.display.set_caption("Programmer RPG")
 pygame.display.set_icon(pygame.image.load("resources/hero.png"))
 
-# pygame.key.set_repeat(10,10)
+def attack():
+    if attackToggle:
+        DISPLAYSURF.blit(attacksMap[FIREBALL], (attackPos[0] * TILESIZE, attackPos[1] * TILESIZE))
+        attackPos[0] += 0.2
+    else:
+        attackPos[0] = heroPos[0]
+        attackPos[1] = heroPos[1]
 
 # Game loop:
 while True:
@@ -34,6 +40,8 @@ while True:
                 heroUp = True
             if event.key == K_s:
                 heroDown = True
+            if event.key == K_j:
+                attackToggle = True
         if event.type == KEYUP:
             if event.key == K_d:
                 heroRight = False
@@ -52,12 +60,10 @@ while True:
     if (heroLeft and not heroRight): xVel -= heroSpeed
     if (heroRight and not heroLeft): xVel += heroSpeed
     
-    # Update Hero Position:
+    # Update Hero Position, and position for attack:
     heroPos[0] += xVel / 60
     heroPos[1] += yVel / 60
-
-    print(heroPos[0])
-    print(heroPos[1])
+    
 
 
     # Loading tilemap
@@ -68,6 +74,9 @@ while True:
     
     # Load Player 
     DISPLAYSURF.blit(HERO, (heroPos[0] * TILESIZE, heroPos[1] * TILESIZE))
+
+    attack()
+    
     
     # Update Display:
     pygame.display.update()

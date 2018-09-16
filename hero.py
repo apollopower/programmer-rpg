@@ -15,3 +15,16 @@ heroUp = False
 heroDown = False
 heroLeft = False
 heroRight = False
+
+
+# Attack Constants:
+FIREBALL = 0
+
+attacksMap = {
+    FIREBALL: pygame.image.load("resources/fireball.png")
+}
+
+attackToggle = False
+attackPos = [heroPos[0],heroPos[1]]
+
+
