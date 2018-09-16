@@ -16,13 +16,6 @@ DISPLAYSURF = pygame.display.set_mode((MAPWIDTH*TILESIZE,MAPHEIGHT*TILESIZE))
 pygame.display.set_caption("Programmer RPG")
 pygame.display.set_icon(pygame.image.load("resources/hero.png"))
 
-def attack():
-    if attackToggle:
-        DISPLAYSURF.blit(attacksMap[FIREBALL], (attackPos[0] * TILESIZE, attackPos[1] * TILESIZE))
-        attackPos[0] += 0.2
-    else:
-        attackPos[0] = heroPos[0]
-        attackPos[1] = heroPos[1]
 
 # Game loop:
 while True:
@@ -41,7 +34,7 @@ while True:
             if event.key == K_s:
                 heroDown = True
             if event.key == K_j:
-                attackToggle = True
+                fireballs.append([heroPos[0] * TILESIZE, heroPos[1] * TILESIZE])
         if event.type == KEYUP:
             if event.key == K_d:
                 heroRight = False
@@ -63,7 +56,6 @@ while True:
     # Update Hero Position, and position for attack:
     heroPos[0] += xVel / 60
     heroPos[1] += yVel / 60
-    
 
 
     # Loading tilemap
@@ -71,12 +63,16 @@ while True:
         for column in range(MAPWIDTH):
             # Draw the resource at the position in tilemap:
             DISPLAYSURF.blit(textures[tilemap[row][column]], (column * TILESIZE, row * TILESIZE))
+
+    # Updating fireball positions
+    for f in range(len(fireballs)):
+        fireballs[f][0] += 6
     
     # Load Player 
     DISPLAYSURF.blit(HERO, (heroPos[0] * TILESIZE, heroPos[1] * TILESIZE))
 
-    attack()
-    
+    for fireball in fireballs:
+        DISPLAYSURF.blit(attacksMap[FIREBALL], pygame.Rect(fireball[0], fireball[1], 0, 0))
     
     # Update Display:
     pygame.display.update()

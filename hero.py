@@ -24,7 +24,5 @@ attacksMap = {
     FIREBALL: pygame.image.load("resources/fireball.png")
 }
 
-attackToggle = False
-attackPos = [heroPos[0],heroPos[1]]
-
+fireballs = []
 
