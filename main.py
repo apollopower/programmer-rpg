@@ -68,9 +68,6 @@ while True:
             # Draw the resource at the position in tilemap:
             DISPLAYSURF.blit(textures[tilemap[row][column]], (column * TILESIZE, row * TILESIZE))
 
-    # Updating fireball positions
-    # for f in range(len(fireballs)):
-        # fireballs[f][0] += 6
 
     for fireball in fireballs:
         updateFireball(fireball)
