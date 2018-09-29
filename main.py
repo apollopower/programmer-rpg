@@ -2,6 +2,7 @@
 import pygame, sys, random
 
 from pygame.locals import *
+from camera import *
 from tilemap import *
 from hero import *
 
@@ -12,7 +13,7 @@ pygame.init()
 BLACK = (0, 0, 0)
 
 # Creating Game Window
-DISPLAYSURF = pygame.display.set_mode((MAPWIDTH*TILESIZE,MAPHEIGHT*TILESIZE))
+DISPLAYSURF = pygame.display.set_mode((CAMERA_WIDTH*TILESIZE,CAMERA_HEIGHT*TILESIZE))
 pygame.display.set_caption("Programmer RPG")
 pygame.display.set_icon(pygame.image.load("resources/hero.png"))
 
@@ -61,12 +62,15 @@ while True:
     heroPos[0] += xVel / 60
     heroPos[1] += yVel / 60
 
+    # Update Camera
+    cameraPos[0] += xVel / 60
+    cameraPos[1] += yVel / 60
 
     # Loading tilemap
     for row in range(MAPHEIGHT):
         for column in range(MAPWIDTH):
             # Draw the resource at the position in tilemap:
-            DISPLAYSURF.blit(textures[tilemap[row][column]], (column * TILESIZE, row * TILESIZE))
+            DISPLAYSURF.blit(textures[tilemap[row][column]], ((column * TILESIZE) - cameraPos[0] * TILESIZE, (row * TILESIZE) - cameraPos[1] * TILESIZE))
 
 
     for fireball in fireballs:
