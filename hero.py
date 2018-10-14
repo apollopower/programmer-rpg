@@ -1,10 +1,11 @@
 import pygame
 from pygame.locals import *
 from tilemap import TILESIZE, MAPHEIGHT, MAPWIDTH
+from camera import *
 
 HERO = pygame.image.load("resources/hero.png")
 
-heroPos = [(MAPWIDTH / 2), (MAPHEIGHT / 2)]
+heroPos = [(CAMERA_WIDTH / 2), (CAMERA_HEIGHT / 2)]
 heroSpeed = 10
 
 xVel = 0

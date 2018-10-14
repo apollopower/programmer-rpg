@@ -3,8 +3,8 @@ from pygame.locals import *
 
 # Constants for game map:
 TILESIZE = 40
-MAPWIDTH = 25
-MAPHEIGHT = 15
+MAPWIDTH = 50
+MAPHEIGHT = 50
 
 GRASS = 1
 
