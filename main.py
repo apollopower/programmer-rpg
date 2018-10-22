@@ -27,44 +27,47 @@ while True:
             sys.exit()
         if event.type == KEYDOWN:
             if event.key == K_d:
-                heroRight = True
+                heroDirectionMap['right'] = True
                 heroDirection = RIGHT
             if event.key == K_a:
-                heroLeft = True
+                heroDirectionMap['left'] = True
                 heroDirection = LEFT
             if event.key == K_w:
-                heroUp = True
+                heroDirectionMap['up'] = True
                 heroDirection = UP
             if event.key == K_s:
-                heroDown = True
+                heroDirectionMap['down'] = True
                 heroDirection = DOWN
             if event.key == K_j:
                 fireballs.append([heroPos[0] * TILESIZE, heroPos[1] * TILESIZE, heroDirection])
         if event.type == KEYUP:
             if event.key == K_d:
-                heroRight = False
+                heroDirectionMap['right'] = False
             if event.key == K_a:
-                heroLeft = False
+                heroDirectionMap['left'] = False
             if event.key == K_w:
-                heroUp = False
+                heroDirectionMap['up'] = False
             if event.key == K_s:
-                heroDown = False
+                heroDirectionMap['down'] = False
     # End of event checker
 
-    # Determine Hero Velocity
-    xVel = yVel = 0
-    if (heroUp and not heroDown): yVel -= heroSpeed
-    if (heroDown and not heroUp): yVel += heroSpeed
-    if (heroLeft and not heroRight): xVel -= heroSpeed
-    if (heroRight and not heroLeft): xVel += heroSpeed
+    # Reset Velocities
+    xVel, yVel = 0, 0
+    # Update Velocities
+    # xVel, yVel = updateHero(heroDirectionMap, xVel, yVel, heroSpeed)
+
+    heroPos = updateHero(heroDirectionMap, xVel, yVel, heroSpeed, heroPos)
     
     # Update Hero Position, and position for attack:
-    heroPos[0] += xVel / 60
-    heroPos[1] += yVel / 60
+    # heroPos[0] += xVel / 60
+    # heroPos[1] += yVel / 60
 
     # Update Camera
-    cameraPos[0] += xVel / 60
-    cameraPos[1] += yVel / 60
+    # cameraPos[0] += xVel / 60
+    # cameraPos[1] += yVel / 60
+
+    cameraPos[0] = heroPos[0]
+    cameraPos[1] = heroPos[1]
 
     # Loading tilemap
     for row in range(MAPHEIGHT):

@@ -3,6 +3,7 @@ from pygame.locals import *
 from tilemap import TILESIZE, MAPHEIGHT, MAPWIDTH
 from camera import *
 
+
 HERO = pygame.image.load("resources/hero.png")
 
 heroPos = [(CAMERA_WIDTH / 2), (CAMERA_HEIGHT / 2)]
@@ -12,6 +13,13 @@ xVel = 0
 yVel = 0
 
 # Keep track of hero inputs given:
+heroDirectionMap = {
+    'up': False,
+    'down': False,
+    'left': False,
+    'right': False,
+}
+
 heroUp = False
 heroDown = False
 heroLeft = False
@@ -24,6 +32,21 @@ LEFT = 2
 RIGHT = 3
 
 heroDirection = RIGHT
+
+def updateHero(heroDirectionMap, xVel, yVel, heroSpeed, heroPos):
+    if (heroDirectionMap['up'] and not heroDirectionMap['down']):
+        yVel -= heroSpeed
+    if (heroDirectionMap['down'] and not heroDirectionMap['up']):
+        yVel += heroSpeed
+    if (heroDirectionMap['left'] and not heroDirectionMap['right']):
+        xVel -= heroSpeed
+    if (heroDirectionMap['right'] and not heroDirectionMap['left']):
+        xVel += heroSpeed
+    
+    heroPos[0] += xVel / 60
+    heroPos[1] += yVel / 60
+
+    return heroPos
 
 # Attack Constants:
 FIREBALL = 0
